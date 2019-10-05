@@ -1,0 +1,39 @@
+<%= form_with scope: :teams, :class => 'form-group', url: teams_path, local: true do |form| %>
+		<div class='my-4'>
+			<p>Team name: </p>
+			<%= form.text_field :team_name, :class => 'form-control', :placeholder=>'Enter team name' %>
+		</div>
+		<div class='my-4'>
+				<div class='text-left'>
+					<p>First player: </p>
+				</div>
+				<div>
+						<p>First name: </p>
+						<%= form.text_field :first_player_first_name, :class => 'form-control', :placeholder=>'Enter player first name'  %><br>
+						<p>Last name: </p>
+						<%= form.text_field :first_player_last_name, :class => 'form-control', :placeholder=>'Enter player last name'  %>
+				</div>
+		</div>
+		<div class='my-4'>
+				<div class='text-left'>
+						<p>Second player: </p>
+				</div>
+				<div>
+						<p>First name: </p>
+						<%= form.text_field :second_player_first_name, :class => 'form-control', :placeholder=>'Enter player first name'  %><br>
+						<p>Last name: </p>
+						<%= form.text_field :second_player_last_name, :class => 'form-control', :placeholder=>'Enter player last name'  %>
+				</div>
+		</div>
+		<div style='display:none;'>
+				<%= form.hidden_field :elimination_round, :value => false%><br>
+				<%= form.hidden_field :quarter_final_round, :value =>false%><br>
+				<%= form.hidden_field :semi_final_round, :value =>false%><br>
+				<%= form.hidden_field :final_round, :value =>false%><br>
+				<%= form.hidden_field :team_win, :value =>0%><br>
+				<%= form.hidden_field :team_score, :value =>0%><br>
+		</div>
+		<div>
+			<%= form.submit :Submit, :class => 'btn btn-md btn-outline-success' %>
+		</div>
+<% end %>

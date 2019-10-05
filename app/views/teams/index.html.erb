@@ -1,0 +1,16 @@
+<%= render 'layouts/banner' %>
+<%= render 'layouts/mainnav' %>
+<%= render 'layouts/navbar' %>
+
+<div class='row my-5'>
+		<div class='col-3 text-center'>
+				<h6> New team </h6>
+				<%= render 'layouts/teamform' %>
+		</div>
+		<div class='col-9 text-center'>
+				<h6> View all participating team </h6>
+				<% @teams.each do |team| %>
+				<p>Team name: <%= team.team_name%></p>
+				<% end %>
+		</div>
+</div>
