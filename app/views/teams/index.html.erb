@@ -4,13 +4,57 @@
 
 <div class='row my-5'>
 		<div class='col-3 text-center'>
-				<h6> New team </h6>
-				<%= render 'layouts/teamform' %>
+
+			<% if @teams.length != 16 %>
+					<div class='d-flex flex-row justify-content-center btn btn-md' data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style='cursor:pointer;'>
+							<i class='bx bxs-user-plus' style='color:black; font-size: 30px; padding-top: 12px;' ></i>
+							<h4 style='padding-top: 12px'>Team</h4>
+					</div>
+					<div class="collapse" id="collapseExample">
+							<%= render 'layouts/teamform' %>
+					</div>
+			<%else%>
+					<% if @cookies != 'true' %>
+							<p> Reached the maximum number of participant </p>
+							<%= render 'layouts/startgame' %>
+					<% else %>
+							<p> Game had started </p>
+							<% if @elimination != 'true' %>
+									<p> Proceed to <%= link_to 'elimination round', eliminations_path, :style => 'color:black; text-decoration:underline;' %> </p>
+							<% else %>
+									<% if @quarter != 'true' %>
+											<p> Proceed to <%= link_to 'quarter final round', quarters_path, :style => 'color:black; text-decoration:underline;' %> </p>
+									<% else %>
+											<% if @semi != 'true' %>
+													<p> Proceed to <%= link_to 'semi final round', semis_path, :style => 'color:black; text-decoration:underline;' %> </p>
+											<% else %>
+													<% if @final != 'true' %>
+															<p> Proceed to <%= link_to 'final round', finals_path, :style => 'color:black; text-decoration:underline;' %> </p>
+													<% else %>
+															<p> Proceed to <%= link_to 'Scoreboard', finals_path, :style => 'color:black; text-decoration:underline;' %> to check for the winner</p>
+													<% end %>
+											<% end %>
+									<% end %>
+							<% end %>
+					<% end %>
+			<%end%>
 		</div>
 		<div class='col-9 text-center'>
-				<h6> View all participating team </h6>
-				<% @teams.each do |team| %>
-				<p>Team name: <%= team.team_name%></p>
-				<% end %>
+				<h6 class='mb-3'> All participating team </h6>
+				<p> Total number of participating: <%=@teams.length%> </p>
+				<div class='d-flex flex-wrap justify-content-around'>
+					<% @teams.each do |team,index| %>
+							<div class='d-flex flex-row justify-content-around'style='background-color: lightcoral; border-radius: 50px; height: 50px; width:200px; margin:20px;'>
+									<p style="padding-top: 12px;"><%= team.team_name%></p>
+									<% if @cookies != 'true' %>
+											<div class='text-left'>
+													<%= link_to team_path(team), method: :delete, data: {confirm: 'Are you sure you want to delete?'} do %>
+															<i class='bx bx-x' style='color:black; font-size: 25px; padding-top: 12px;'></i>
+													<% end %>
+											</div>
+									<% end %>
+							</div>
+					<% end %>
+				</div>
 		</div>
 </div>

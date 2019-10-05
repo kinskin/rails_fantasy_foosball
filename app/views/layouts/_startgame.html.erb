@@ -1,0 +1,6 @@
+<%= form_with scope: :starts, url: teams_path, local: true do |form| %>
+		<div style='display: none;'>
+				<%= form.hidden_field :start, :value => true %>
+		</div>
+		<%= form.submit :Start, :class => 'btn btn-md btn-outline-success'%>
+<% end %>
