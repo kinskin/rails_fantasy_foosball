@@ -1,0 +1,61 @@
+<%= render 'layouts/banner' %>
+<%= render 'layouts/mainnav' %>
+
+<div class='text-center'>
+		<h3>Scoreboard</h3>
+</div>
+<div class='my-4'>
+		<div class='row text-center'>
+				<div class='col-2' style='border-bottom:2px solid black;'>
+							<p>Ranking</p>
+				</div>
+				<div class='col-2' style='border-bottom:2px solid black;'>
+							<p>Team Name</p>
+				</div>
+				<div class='col-4' style='border-bottom:2px solid black;'>
+							<div class='row'>
+									<div class='col-6'>
+												<p>1st player</p>
+									</div>
+									<div class='col-6'>
+												<p>2nd player</p>
+									</div>
+							</div>
+				</div>
+				<div class='col-2' style='border-bottom:2px solid black;'>
+							<p>Team score</p>
+				</div>
+				<div class='col-2' style='border-bottom:2px solid black;'>
+							<p>Team win</p>
+				</div>
+		</div>
+
+		<div class='my-3'>
+				<% @teams.each_with_index do |team,index| %>
+						<div class='row text-center'>
+								<div class='col-2'>
+											<p><%=index+1%></p>
+								</div>
+								<div class='col-2'>
+											<p><%=team.team_name%></p>
+								</div>
+								<div class='col-4'>
+											<div class='row'>
+														<div class='col-6'>
+																	<p><%=team.first_player_first_name%></p>
+														</div>
+														<div class='col-6'>
+																	<p><%=team.second_player_first_name%></p>
+														</div>
+											</div>
+								</div>
+								<div class='col-2'>
+											<p><%=team.team_score%></p>
+								</div>
+								<div class='col-2'>
+											<p><%=team.team_win%></p>
+								</div>
+						</div>
+				<% end %>
+		</div>
+</div>

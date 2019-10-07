@@ -1,7 +1,9 @@
 <%= render 'layouts/banner' %>
 <%= render 'layouts/mainnav' %>
-<%= render 'layouts/navbar' %>
 
+<div class='text-center'>
+		<h3>Teams</h3>
+</div>
 <div class='row my-5'>
 		<div class='col-3 text-center'>
 
@@ -14,29 +16,7 @@
 							<%= render 'layouts/teamform' %>
 					</div>
 			<%else%>
-					<% if @cookies != 'true' %>
-							<p> Reached the maximum number of participant </p>
-							<%= render 'layouts/startgame' %>
-					<% else %>
-							<p> Game had started </p>
-							<% if @elimination != 'true' %>
-									<p> Proceed to <%= link_to 'elimination round', eliminations_path, :style => 'color:black; text-decoration:underline;' %> </p>
-							<% else %>
-									<% if @quarter != 'true' %>
-											<p> Proceed to <%= link_to 'quarter final round', quarters_path, :style => 'color:black; text-decoration:underline;' %> </p>
-									<% else %>
-											<% if @semi != 'true' %>
-													<p> Proceed to <%= link_to 'semi final round', semis_path, :style => 'color:black; text-decoration:underline;' %> </p>
-											<% else %>
-													<% if @final != 'true' %>
-															<p> Proceed to <%= link_to 'final round', finals_path, :style => 'color:black; text-decoration:underline;' %> </p>
-													<% else %>
-															<p> Proceed to <%= link_to 'Scoreboard', finals_path, :style => 'color:black; text-decoration:underline;' %> to check for the winner</p>
-													<% end %>
-											<% end %>
-									<% end %>
-							<% end %>
-					<% end %>
+					<p> Game had started.<br>Click on respective team to update the score. </p>
 			<%end%>
 		</div>
 		<div class='col-9 text-center'>
@@ -46,14 +26,18 @@
 					<% @teams.each do |team,index| %>
 							<div class='d-flex flex-row justify-content-around'style='background-color: lightcoral; border-radius: 50px; height: 50px; width:200px; margin:20px;'>
 									<p style="padding-top: 12px;"><%= team.team_name%></p>
-									<% if @cookies != 'true' %>
-											<div class='text-left'>
+									<div class='d-flex flex-row'>
+											<div class='text-right'>
 													<%= link_to team_path(team), method: :delete, data: {confirm: 'Are you sure you want to delete?'} do %>
 															<i class='bx bx-x' style='color:black; font-size: 25px; padding-top: 12px;'></i>
 													<% end %>
 											</div>
-									<% end %>
+											<div class='text-right'>
+														<i class='bx bxs-pencil' style='color:black; font-size: 20px; padding-top: 12px; cursor:pointer;' data-toggle="modal" data-target="#example<%=team.id%>"></i>
+											</div>
+									</div>
 							</div>
+					<%= render 'layouts/scoremodal', team_name: team.team_name, team_id: team.id, team: team%>
 					<% end %>
 				</div>
 		</div>

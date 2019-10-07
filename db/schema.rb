@@ -21,10 +21,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_070901) do
     t.string "first_player_last_name"
     t.string "second_player_first_name"
     t.string "second_player_last_name"
-    t.text "elimination_round"
-    t.text "quarter_final_round"
-    t.text "semi_final_round"
-    t.text "final_round"
+    t.text "stage"
     t.integer "team_win"
     t.integer "team_score"
     t.datetime "created_at", null: false

@@ -1,0 +1,41 @@
+<div class="modal fade" id="example<%=team_id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel"><%= team_name%> score update</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_with scope: :teams_update, model: team, local: true do |form| %>
+        		<div class='my-4'>
+		        		<%=form.label :stage, 'Select stage : ' %>
+		        		<%=form.select :stage, ['Elimination round', 'Quarter final round', 'Semi final round', 'Final round'], :prompt => 'Select stage'%>
+		        </div>
+		        <div class='row my-4'>
+				         <div class='col-6'>
+				        		<p> Existing score : <%= team.team_score %> </p>
+				        </div>
+				        <div class='col-6'>
+				        		<%=form.label :team_score, 'Team score : ' %>
+				        		<%=form.number_field :team_score, in: 0..999, step: 1%>
+				        </div>
+		      	</div>
+		      	<div class='row my-4'>
+				        <div class='col-6'>
+				        		<p> Existing win : <%= team.team_win %> </p>
+				        </div>
+				        <div class='col-6'>
+				        		<%=form.label :team_win%>
+				        		<%=form.number_field :team_win, in: 0..999,step:1%>
+				        </div>
+				    </div>
+		        <div class='my-4'>
+		        		<%=form.submit 'Update score', :class => 'btn btn-md btn-outline-success' %>
+		        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
